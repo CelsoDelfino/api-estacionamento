@@ -5,6 +5,8 @@ import com.github.parkapi.demoparkapi.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -31,5 +33,13 @@ public class UsuarioService {
         Usuario user = buscarPorId(id);
         user.setPassword(password);
         return user;
+    }
+
+    public List<Usuario> listarUsuarios(){
+        List<Usuario> listUsers =  this.usuarioRepository.findAll();
+        if(listUsers.isEmpty()){
+            throw new RuntimeException("Usuarios não localizados!");
+        }
+        return listUsers;
     }
 }
