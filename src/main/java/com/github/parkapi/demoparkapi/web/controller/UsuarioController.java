@@ -2,6 +2,8 @@ package com.github.parkapi.demoparkapi.web.controller;
 
 import com.github.parkapi.demoparkapi.entity.Usuario;
 import com.github.parkapi.demoparkapi.service.UsuarioService;
+import com.github.parkapi.demoparkapi.web.controller.dto.UsuarioCreateDto;
+import com.github.parkapi.demoparkapi.web.controller.dto.mapper.UsuarioMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
-        Usuario user = this.usuarioService.salvar(usuario);
+    public ResponseEntity<Usuario> create(@RequestBody UsuarioCreateDto createDto) {
+        Usuario user = this.usuarioService.salvar(UsuarioMapper.toUsuario(createDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
